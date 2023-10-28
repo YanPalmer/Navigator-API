@@ -21,11 +21,15 @@ h1 {
 main {
     position: relative;
     width: 100%;
+    min-width: 700px;
+    max-width: 1326px;
     height: 500px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    background-color: red;
+    background-color: #252527;
+    border-radius: 15px;
     gap: 20px;
+    padding: 20px;
 }
 
 main section {
@@ -33,11 +37,40 @@ main section {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 100%;
+    width: 415px;
+    height: 220px;
+    background-color: grey;
+    border-radius: 15px;
+}
+
+main section a {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+}
+
+main section a img {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+}
+
+main section:hover {
+    opacity: 0.4;
+    transition: 0.3s;
+}
+
+main section h4 {
+    position: absolute;
+    color: white;
+    font-size: 24px;
 }
 
 /* @media (max-width: 700px) {
     main section {
-        grid-template-columns: repeat(1, 1fr);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 } */
