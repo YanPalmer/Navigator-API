@@ -11,15 +11,33 @@
     <!-- Script para a API leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="geolocation.css">
 </head>
 
 <body>
     <h1>Geolocalizador!</h1>
-    <p>
-        latitude: <span id="latitude"></span>&deg;<br>
-        longitude: <span id="longitude"></span>&deg;
-    </p>
-    <button id="enviarDados">Save</button>
+    <article>
+        <section id="section1">
+            <h3>Save location</h3>
+            <p>
+                <label>Name:</label> <input id="name" placeholder="My name is..."><br>
+                <label>Latitude:</label> <span id="latitude"></span>&deg;<br>
+                <label>Longitude:</label> <span id="longitude"></span>&deg;
+            </p>
+            <button id="salvarLatLon">Save</button>
+        </section>
+        <section id="section2">
+            <h3>List location</h3>
+            <button id="listar">List users</button>
+            <ul id="listarUsuarios"></ul>
+        </section>
+        <section id="section3">
+            <h3>Delete user</h3>
+            <p>User to be deleted</p>
+            <input id="excluirUsuario" placeholder="User...">
+        </section>
+    </article>
+
     <div id="map" style="height: 400px;"></div>
 
     <script type="module" src="geolocation.script.js"></script>

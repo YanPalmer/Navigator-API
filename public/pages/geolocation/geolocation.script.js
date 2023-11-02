@@ -7,7 +7,7 @@ if ("geolocation" in navigator) {
         // Apresenta na tela
         document.getElementById('latitude').textContent = lat;
         document.getElementById('longitude').textContent = lon;
-        
+
         // Define o mapa
         var map = L.map('map').setView([lat, lon], 15);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -34,9 +34,7 @@ if ("geolocation" in navigator) {
             [-8.317208, -35.96117],
             [-8.30328, -36.027431]
         ]).addTo(map)
-            // .bindPopup("I am a polygon.")
-            .bindPopup("It's where i work")
-            ;
+            .bindPopup("I am a polygon.");
 
         const popup = L.popup()
             .setLatLng([lat, lon])
@@ -53,11 +51,18 @@ if ("geolocation" in navigator) {
         map.on('click', onMapClick);
 
         // Botão que ao ser clicado executa a função "enviarDados"
-        let button = document.getElementById('enviarDados')
-        button.addEventListener('click', enviarDados)
+        let button_Create = document.getElementById('salvarLatLon');
+        button_Create.addEventListener('click', enviarLatLon);
         // console.log(button);
-        async function enviarDados() {
-            const data = { lat, lon };
+        let button_Update = document.getElementById('listar');
+        button_Update.addEventListener('click', listarUsuarios);
+
+
+        // Envia Nome, Latitude e Longitude
+        async function enviarLatLon() {
+            const name = document.getElementById("name").value;
+            // Armazena os dados para serem enviados ao "servidor" e em seguida ao "banco de dados"
+            const data = { name, lat, lon };
             const options = {
                 method: 'POST',
                 headers: {
@@ -66,20 +71,45 @@ if ("geolocation" in navigator) {
                 // Converte JS para JSON
                 body: JSON.stringify(data)
             }
-            
+
+            // Envia os dados com o método POST para o servidor
             const response = await fetch('/salvarDados', options);
-            const resposta = await response.json()
-            console.log("Localização salva!", resposta.body);
+
+            // Converte o "response" em JSON
+            const resposta = await response.json();
+            console.log(resposta.message);
             // const json = await response.json();
             // console.log("O meu json", json);
 
         }
 
+        // Lista os usuários dentro do elemento "ul"
+        async function listarUsuarios() {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application-json'
+                }
+            }
+            const response = await fetch('/listarUsuarios', options);
+            const resposta = await response.json();
+            console.log(resposta.message);
+            
+            const lista = document.querySelector("ul");
+            lista.textContent = "";
+            
+            resposta.users.forEach(element => {
+                const li = document.createElement("li");
+                li.textContent = [element.id, element.name, element.lat, element.lon];
+                lista.appendChild(li);
+            });
+        }
 
 
     });
 } else {
     console.log("geolocation IS NOT available");
+    console.log("Refresh the page");
 };
 
 

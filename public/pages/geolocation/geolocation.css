@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+}
+
+body h1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 3px;
+}
+
+body article {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 200px;
+    justify-content: space-between;
+    overflow-y: auto;
+
+}
+
+body article section {
+    position: relative;
+    width: 260px;
+}
